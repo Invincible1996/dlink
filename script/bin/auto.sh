@@ -6,7 +6,7 @@ JAR_NAME="dlink-admin"
 
 # Use FLINK_HOME:
 # CLASS_PATH="./lib/*:./plugins/*:./plugins/flink${FLINK_VERSION}/*:$FLINK_HOME/lib/*"
-CLASS_PATH="./lib/*:./plugins/*:./plugins/flink${FLINK_VERSION}/*"
+CLASS_PATH="./lib/*:config:./plugins/*:./plugins/flink${FLINK_VERSION}/*"
 
 PID_FILE="dinky.pid"
 
@@ -40,7 +40,7 @@ tips() {
 start() {
   pid=$(cat ${PID_PATH}/${PID_FILE})
   if [ -z $pid ]; then
-    nohup java -Ddruid.mysql.usePingMethod=false -Xms512M -Xmx2048M -XX:PermSize=512M -XX:MaxPermSize=1024M -XX:+HeapDumpOnOutOfMemoryError -Xverify:none -cp ${CLASS_PATH} com.dlink.Dlink >/dev/null 2>&1 &
+    nohup java -Ddruid.mysql.usePingMethod=false -Xms512M -Xmx2048M -XX:PermSize=512M -XX:MaxPermSize=1024M -XX:+HeapDumpOnOutOfMemoryError -Xverify:none -cp ${CLASS_PATH} org.dinky.Dinky >/dev/null 2>&1 &
     echo $! >${PID_PATH}/${PID_FILE}
     echo "FLINK VERSION : $FLINK_VERSION"
     echo "........................................Start Dinky Successfully........................................"
@@ -52,7 +52,7 @@ start() {
 startWithJmx() {
   pid=$(cat ${PID_PATH}/${PID_FILE})
   if [ -z $pid ]; then
-    nohup java -Ddruid.mysql.usePingMethod=false -Xms512M -Xmx2048M -XX:PermSize=512M -XX:MaxPermSize=1024M -XX:+HeapDumpOnOutOfMemoryError -Xverify:none ${JMX} -cp ${CLASS_PATH} com.dlink.Dlink >/dev/null 2>&1 &
+    nohup java -Ddruid.mysql.usePingMethod=false -Xms512M -Xmx2048M -XX:PermSize=512M -XX:MaxPermSize=1024M -XX:+HeapDumpOnOutOfMemoryError -Xverify:none ${JMX} -cp ${CLASS_PATH} org.dinky.Dinky >/dev/null 2>&1 &
     echo $! >${PID_PATH}/${PID_FILE}
     echo "........................................Start Dlink Successfully........................................"
   else

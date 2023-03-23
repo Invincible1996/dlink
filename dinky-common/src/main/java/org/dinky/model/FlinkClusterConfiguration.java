@@ -36,13 +36,15 @@ public class FlinkClusterConfiguration {
     private String flinkConfigPath;
     private String flinkLibPath;
     private String userJarPath;
+    private String flinkVersion;
 
     Map<String, String> flinkConfig;
     Map<String, String> kubernetesConfig;
 
-    public static enum Type {
+    public enum Type {
         //
         Yarn,
-        Kubernetes;
+        Kubernetes,
+        KubernetesOperator;
     }
 }
